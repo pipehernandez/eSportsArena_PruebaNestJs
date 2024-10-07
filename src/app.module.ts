@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { TournamentsModule } from './tournaments/tournaments.module';
+import { MatchesModule } from './matches/matches.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { TournamentsModule } from './tournaments/tournaments.module';
       }),
     }),
     UsersModule,
-    TournamentsModule],
+    TournamentsModule,
+    MatchesModule],
   controllers: [AppController],
   providers: [AppService],
 })
