@@ -14,22 +14,27 @@ export class TournamentsController {
   }
 
   @Get()
-  findAll() {
-    return this.tournamentsService.findAll();
+  async findAll(): Promise<Tournament[]> {
+    return await this.tournamentsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tournamentsService.findOne(+id);
+  async findOne(@Param('id') id: number): Promise<Tournament> {
+    return await this.tournamentsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTournamentDto: UpdateTournamentDto) {
-    return this.tournamentsService.update(+id, updateTournamentDto);
+  async update(@Param('id') id: number, @Body() updateTournamentDto: UpdateTournamentDto): Promise<Tournament> {
+    return await this.tournamentsService.update(id, updateTournamentDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tournamentsService.remove(+id);
+  async remove(@Param('id') id: number): Promise<string> {
+    return await this.tournamentsService.remove(id);
+  }
+
+  @Post(':tournamentId/pairings')
+  async generatePairings(@Param('tournamentId') tournamentId: number): Promise<any>{
+    return await this.tournamentsService.generatePairings(tournamentId);
   }
 }

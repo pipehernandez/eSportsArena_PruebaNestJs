@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Match } from "src/matches/entities/match.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tournaments')
 export class Tournament {
@@ -19,5 +20,7 @@ export class Tournament {
 
     @Column()
     status: string;
-    
+
+    @OneToMany(() => Match, match => match.tournament)
+    matches: Match[];
 }
