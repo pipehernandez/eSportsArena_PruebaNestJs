@@ -1,5 +1,6 @@
 import { Role } from "src/common/enums/role.enum";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Match } from "src/matches/entities/match.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -23,4 +24,10 @@ export class User {
 
     @Column({ type: 'enum', enum: Role, default: Role.Admin })
     role: Role;
+
+    @OneToMany(() => Match, match => match.player1)
+    matchesAsPlayer1: Match[];
+
+    @OneToMany(() => Match, match => match.player2)
+    matchesAsPlayer2: Match[];
 }
