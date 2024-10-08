@@ -22,7 +22,7 @@ export class User {
     @Column({ type: 'varchar', length: 150, nullable: false })
     password: string;
 
-    @Column({ type: 'enum', enum: Role, default: Role.User })
+    @Column({ type: 'enum', enum: Role, default: Role.Admin })
     role: Role;
 
     @OneToMany(() => Match, match => match.player1)
