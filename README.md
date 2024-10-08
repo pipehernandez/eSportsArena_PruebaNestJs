@@ -32,7 +32,16 @@
 $ npm install
 ```
 
+## Create a .env file.
+- DB_USER= user
+- DB_HOST= host
+- DB_PASSWORD= password
+- DB_DATABASE= postgres
+- DB_PORT= 6543
+- JWT_SECRET= secret
+
 ## Compile and run the project
+- Go to http://localhost:3000/api/docs to swagger documentation
 
 ```bash
 # development
@@ -59,6 +68,7 @@ $ npm run test:cov
 ```
 
 ## Resources
+
 
 Check out a few resources that may come in handy when working with NestJS:
 
