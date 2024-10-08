@@ -14,11 +14,7 @@ export class MatchesService {
     private readonly matchRepository: Repository<Match>,
   ) { }
 
-  async registerMatchResult(
-    matchId: number,
-    player1Score: number,
-    player2Score: number,
-  ): Promise<any> {
+  async registerMatchResult(matchId: number, player1Score: number, player2Score: number,): Promise<any> {
     try {
       const match = await this.matchRepository.findOne({
         where: { id: matchId },
