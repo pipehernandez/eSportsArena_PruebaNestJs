@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { MatchesService } from './matches.service';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Match } from './entities/match.entity';
 
 @ApiTags('Matches')
 @Controller('matches')
@@ -36,8 +37,15 @@ export class MatchesController {
     },
   })
   @Post(':matchId/result')
-  registerMatchResult(@Param('matchId') matchId: number, @Body('player1Score') player1Score: number, @Body('player2Score') player2Score: number,) {
-    return this.matchesService.registerMatchResult(matchId, player1Score, player2Score);
+  async registerMatchResult(@Param('matchId') matchId: number, @Body('player1Score') player1Score: number, @Body('player2Score') player2Score: number,) {
+    return await this.matchesService.registerMatchResult(matchId, player1Score, player2Score);
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'Get all matches' })
+  @ApiResponse({ status: 200, description: 'List of matches.' })
+  async getMatches(): Promise<Match[]> {
+    return await this.matchesService.getMatches();
   }
 
 }

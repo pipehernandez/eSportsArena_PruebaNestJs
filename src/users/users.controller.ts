@@ -21,8 +21,8 @@ export class UsersController {
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'List of users.' })
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findAll(): Promise<UserDto[]> {
+    return await this.usersService.findAll();
   }
 
   @ApiOperation({ summary: 'Get a user by ID' })
@@ -30,8 +30,8 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'User not found.' })
   @ApiParam({ name: 'id', description: 'ID of the user to retrieve' })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  async findOne(@Param('id') id: number): Promise<UserDto> {
+    return await this.usersService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Update a user by ID' })
@@ -39,8 +39,8 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'User not found.' })
   @ApiParam({ name: 'id', description: 'ID of the user to update' })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  async update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto): Promise<UserDto> {
+    return await this.usersService.update(id, updateUserDto);
   }
 
   @ApiOperation({ summary: 'Delete a user by ID' })
@@ -48,7 +48,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'User not found.' })
   @ApiParam({ name: 'id', description: 'ID of the user to delete' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async remove(@Param('id') id: number): Promise<string> {
+    return await  this.usersService.remove(id);
   }
 }

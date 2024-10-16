@@ -113,7 +113,6 @@ export class TournamentsService {
           matches.push(match);
         }
       }
-
       return this.matchRepository.save(matches);
     } catch (error) {
       throw new InternalServerErrorException('Falied generating pairings. ' + error.message)

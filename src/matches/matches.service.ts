@@ -22,10 +22,8 @@ export class MatchesService {
       if (!match) {
         throw new BadRequestException(`Match with id ${matchId} not found.`);
       }
-
       match.scorePlayer1 = player1Score;
       match.scorePlayer2 = player2Score;
-
       if (player1Score > player2Score) {
         match.result = 'Player1_WIN';
       } else if (player1Score < player2Score) {
@@ -33,12 +31,21 @@ export class MatchesService {
       } else {
         match.result = 'DRAW';
       }
-
       await this.matchRepository.save(match);
       return match;
     } catch (error) {
       throw new InternalServerErrorException(
         'Failed registering match result. ' + error.message,
+      );
+    }
+  }
+
+  async getMatches(): Promise<Match[]>{
+    try {
+      return await this.matchRepository.find({ relations: ['player1', 'player2', 'tournament'] });
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Failed getting matches. ' + error.message,
       );
     }
   }
